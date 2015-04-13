@@ -1,0 +1,18 @@
+The Rusokoni Market Api is divided into two the normal xml file which can be got directly by accessing the link 
+
+http://rusokoni.org/index.php/api/rest/markets/lat/0.330166/lng/32.613954/range/2 
+
+Incase you want the json format then you format it by adding format/json 
+
+http://rusokoni.org/index.php/api/rest/markets/lat/0.330166/lng/32.613954/range/2/format/json 
+
+The lat and long are passed respectively through 
+
+lat/{value}/lng/{value} 
+
+The range/2 is the radius of coverage 
+
+range{radius in km}
+
+Incase one wants to get locations from a specific Location all that is needed is their location which can be pinged through browser and mobile GPS enabled phones 
+
