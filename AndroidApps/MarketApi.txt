@@ -40,4 +40,25 @@ where
 
 prices/id/{id of the market}
 
+*
+* The API has got more security implemented based on the Rest Api digest authentication 
+*
+*
+*
+*
+*
 
+More additional information to the Api
+-----------------------------------------------------------------------------------------------------------------
+With the api growing the way it is, I thought it was time to put in some security features.
+From now on, all requests to the api should include the username and password using digest authentication like below. This ensures that we are only processing requests from authorized sources. Saves us from random bots hitting the server and raising the load.
+You might want to look at the controller (application/controllers/api/rest.php). The code is not that complicated, for most of the stuff you need, you can probably code it in yourself.
+I've added the following to the api.
+Get active countries (You need the country id when registering)
+curl --digest -u rusokoni_api:zZj0IdM0wC\"2e4M http://rusokoni.org/index.php/api/rest/countries
+Signup (After successful signup it returns the authentication token. Do as much validation as you can on the client side before posting to the api)
+curl --digest -u rusokoni_api:zZj0IdM0wC\"2e4M -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"email":"rusokoni_api@rusokoni_api1.com","password":"password", "first_name":"rusokoni_api","last_name":"istrator","user_country":"227"}' http://rusokoni.org﻿/index.php/api/rest/signup
+Get authentication token
+curl --digest -u rusokoni_api:zZj0IdM0wC\"2e4M -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"email":"rusokoni_api@rusokoni_api.com","password":"password"}' http://rusokoni.org/index.php/api/rest/login
+Use authentication token for actions that require the user to be logged in
+curl --digest -u rusokoni_api:zZj0IdM0wC\"2e4M -H "Accept: application/json" http://rusokoni.org/index.php/api/rest/checklogin/token/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEifQ.HP83zAYkYrBuKEeuiQqDfE7x0BvvZf9D-eN62YTvJwk2D
