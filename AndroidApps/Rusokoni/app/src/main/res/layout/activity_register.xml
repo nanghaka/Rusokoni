@@ -43,60 +43,53 @@
 
             <!-- Full Name Label -->
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Full Name"
-                android:textColor="#ffffff" />
+
 
             <EditText
-                android:id="@+id/reg_fullname"
+                android:id="@+id/reg_firstname"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dip"
                 android:layout_marginTop="5dip"
                 android:singleLine="true"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:hint="First Name"/>
+
+
+
+            <EditText
+                android:id="@+id/reg_lastname"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:layout_marginTop="5dip"
+                android:singleLine="true"
+                android:textColor="#ffffff"
+                android:hint="Last Name "/>
             <!-- Email Label -->
+
+
              <!-- Full Name Label -->
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Username"
-                android:textColor="#ffffff" />
 
-            <EditText
-                android:id="@+id/reg_username"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dip"
-                android:layout_marginTop="5dip"
-                android:singleLine="true"
-                android:textColor="#ffffff" />
+
+
             <!-- Email Label -->
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:textColor="#ffffff" />
 
             <EditText
                 android:id="@+id/reg_email"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
                 android:layout_marginBottom="20dip"
                 android:layout_marginTop="5dip"
                 android:singleLine="true"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:hint="Email"/>
             <!-- Password Label -->
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Password"
-                android:textColor="#ffffff" />
+
 
             <EditText
                 android:id="@+id/reg_password"
@@ -105,12 +98,20 @@
                 android:layout_marginTop="5dip"
                 android:password="true"
                 android:singleLine="true"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:hint="Password"/>
             <!-- Register Button -->
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/usercountry"
+                android:layout_gravity="center_horizontal"
+                />
 
             <Button
                 android:id="@+id/btnRegister"
-                android:layout_width="230dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dip"
@@ -119,14 +120,15 @@
 
             <!-- Link to Login Screen -->
 
-            <TextView
+            <Button
+
                 android:id="@+id/link_to_login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dip"
                 android:layout_marginTop="40dip"
                 android:gravity="center"
-                android:text="Already have account! Login here"
+                android:text="Login here"
                 android:textColor="#ffffff"
                 android:textSize="20dip" />
         </LinearLayout>
