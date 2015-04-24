@@ -3,6 +3,7 @@ package com.ilicit.rusokoni;
 
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -86,7 +87,7 @@ public class MainActivity extends ActionBarActivity {
         mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         // Handle DrawerList
-        LinearLayout mDrawerList = (LinearLayout) findViewById(R.id.drawerList);
+        final LinearLayout mDrawerList = (LinearLayout) findViewById(R.id.drawerList);
         gpsActivity = new GpsActivity(savedInstanceState,this);
 
         // Handle ProgressBar
@@ -97,13 +98,11 @@ public class MainActivity extends ActionBarActivity {
         mDrawerList.findViewById(R.id.drawer_opensource).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Libs.Builder()
-                        .withFields(R.string.class.getFields())
-                        .withVersionShown(true)
-                        .withLicenseShown(true)
-                        .withActivityTitle(getString(R.string.drawer_opensource))
-                        .withActivityTheme(R.style.AboutTheme)
-                        .start(MainActivity.this);
+
+                startActivity(new Intent(MainActivity.this,AboutActivity.class));
+
+                mDrawerLayout.closeDrawers();
+
             }
         });
         ((ImageView) mDrawerList.findViewById(R.id.drawer_opensource_icon)).setImageDrawable(new IconicsDrawable(this, FontAwesome.Icon.faw_github).colorRes(R.color.secondary).actionBarSize());

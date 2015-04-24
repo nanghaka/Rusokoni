@@ -12,7 +12,8 @@
 
     <string name="drawer_switch">SwitchSample</string>
     <string name="drawer_opensource">About RuSokoni</string>
-
+    <string name="about">Ru meaning Rural; Sokoni originating from Swahili meaning Markets. Rusokoni is an all in one Agricultural Markets bridging the knowledge gap in market prices of Agricultural produce. The App is built based on the EWERDIMA Platform for disaster management. </string>
+<string name="about2">Challenge is amidst rapidly changing prices, it is difficult for farmers, individuals, agro business persons involved in agricultural produce to postulate prices, so they end up pricing their products less and the sometimes the consumer is over charged. With dynamic market prices, Rusokoni gives you the ability to know the market price of agro products.</string>
 
     <string name="dialog_nointernet">No internet connection!</string>
     <string name="dialog_uploading">Loading Markets&#8230;</string>

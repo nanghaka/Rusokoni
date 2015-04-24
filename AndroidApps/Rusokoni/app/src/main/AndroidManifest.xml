@@ -37,6 +37,7 @@
             android:label="@string/activity_detail_title">
         </activity>
         <activity android:name=".MarketActivity"></activity>
+        <activity android:name=".AboutActivity" android:theme="@style/AboutTheme" android:label="@string/drawer_opensource" ></activity>
 
     </application>
 </manifest>
