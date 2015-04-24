@@ -20,7 +20,7 @@
             android:layout_height="150dp"
             android:alpha="1.5"
             android:gravity="center"
-            android:src="@drawable/splash_logo" />
+            android:src="@drawable/logo" />
     </LinearLayout>
 
     <Button
@@ -28,26 +28,16 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="-4dp"
-        android:layout_marginLeft="-5dp"
-        android:layout_marginRight="-5dp"
+
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:hint=" "
         android:minHeight="52dp"
         android:text="Sign Up"
         android:textColor="#ffff" />
 
-    <Button
-        android:id="@+id/fb_button"
-        android:layout_width="210dp"
-        android:layout_height="40dp"
-        android:layout_above="@+id/signup_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/fb_low"
-        android:textColor="#ffffff"
-        android:textStyle="bold" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -126,34 +116,34 @@
 
     <Button
         android:id="@+id/normal_loginBTN"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="49dp"
         android:layout_below="@+id/linearLayout2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:background="@drawable/login"
+       android:text="Login"
         android:textColor="#ffffff" />
 
-    <Button
+   <!-- <Button
         android:id="@+id/twitter_button"
         android:layout_width="210dp"
         android:layout_height="40dp"
         android:layout_alignLeft="@+id/fb_button"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
-        android:background="@drawable/twitter"
+
         android:textColor="#ffffff"
         android:textStyle="bold" />
-
+-->
     <TextView
         android:id="@+id/profile_name"
-        android:layout_width="174dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout1"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:lines="2"
-        android:text="To get started, Login"
+        android:text="Welcome To get started, Login"
         android:textSize="17sp" />
 
 </RelativeLayout>
