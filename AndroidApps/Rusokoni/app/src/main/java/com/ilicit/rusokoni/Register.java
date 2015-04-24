@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ilicit.rusokoni.library.UserFunctions;
+import com.ilicit.rusokoni.model.UserModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +22,7 @@ public class Register extends ActionBarActivity {
 	EditText reg_email;
 	EditText reg_password;
 	Button reg_signup;
+    ProgressDialog progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,10 @@ public class Register extends ActionBarActivity {
 		reg_email = (EditText) findViewById(R.id.reg_email);
 		reg_password = (EditText) findViewById(R.id.reg_password);
 		reg_signup = (Button) findViewById(R.id.btnRegister);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("please wait ..");
+        progressDialog.setCancelable(false);
 
 		// Listening to SignUp Button
 		reg_signup.setOnClickListener(new OnClickListener() {
@@ -57,8 +63,16 @@ public class Register extends ActionBarActivity {
 
 	private void signUp(final String fullname, final String username, String email,
 			final String password) {
-		final ProgressDialog progressDialog = ProgressDialog.show(
-				this, "", "Please Wait...", false);
+
+        final UserModel userModel = new UserModel();
+        userModel.setEmail(email);
+        userModel.setFirst_name("");
+        userModel.setLast_name("");
+        userModel.setPassword(password);
+        userModel.setUser_country("");
+
+
+		progressDialog.show();
 		
 		// other fields can be set just like with ParseObject
 		
@@ -69,18 +83,17 @@ public class Register extends ActionBarActivity {
 				// TODO Auto-generated method stub
 				JSONObject jsonResponse = null;
 				UserFunctions userFunctions = new UserFunctions(getApplicationContext());
-				jsonResponse = userFunctions.registerUser(fullname, username, password);
+				jsonResponse = userFunctions.registerUser(userModel,Register.this);
 				
 				try {
-					if (jsonResponse.get("status").toString().contains("1")) {
+					if (jsonResponse.has("success")) {
 
-						removeDialog();
+						progressDialog.dismiss();
 						startActivity(new Intent(getApplicationContext(), MainActivity.class));
 						
-					} else if (jsonResponse.get("status").toString()
-							.contains("0")) {
+					} else if (jsonResponse.getString("success") != null) {
 
-						removeDialog();
+                        progressDialog.dismiss();
 
 						// showAlert
 						// pass jsonresponse to dialog
@@ -89,21 +102,12 @@ public class Register extends ActionBarActivity {
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
+                    progressDialog.dismiss();
 					e.printStackTrace();
 				}
 			}
 
-			private void removeDialog() {
-				runOnUiThread(new Runnable() {
 
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						progressDialog.dismiss();
-					}
-				});
-				
-			}
 		}).start();
 		
 	}

@@ -35,7 +35,9 @@ public class Login extends Activity implements OnClickListener {
 		final EditText username = (EditText) findViewById(R.id.username);
 		final EditText password = (EditText) findViewById(R.id.password);
 		normalLogin = (Button) findViewById(R.id.normal_loginBTN);
-		/*signUp = (Button)findViewById(R.id.signup_button);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("please wait...");
+		signUp = (Button)findViewById(R.id.signup_button);
 		signUp.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -43,12 +45,13 @@ public class Login extends Activity implements OnClickListener {
 				// TODO Auto-generated method stub
 				startActivity(new Intent(getApplicationContext(), Register.class));
 			}
-		});*/
+		});
 		normalLogin.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+                progressDialog.show();
 				normalLogin(username.getText().toString(), password.getText()
 						.toString());
 			}
@@ -58,7 +61,7 @@ public class Login extends Activity implements OnClickListener {
 	protected void normalLogin(final String email, final String password) {
 		// TODO Auto-generated method stub
 
-		progressDialog = ProgressDialog.show(this, "", "Logging in...", true);
+	//	progressDialog.show(this, "", "Logging in...", true);
 
 		final UserFunctions userFunctions = new UserFunctions(this);
 
@@ -70,14 +73,15 @@ public class Login extends Activity implements OnClickListener {
 				JSONObject jsonResponse = null;
 				jsonResponse = userFunctions.loginUser(email, password);
 				try {
-					if (jsonResponse.getString("status").contains("1")) {
-						
-						removeDialog(true, jsonResponse);
+					if (jsonResponse.has("success")) {
+
+                        progressDialog.dismiss();
+                        Utils.save("Token",jsonResponse.getString("success"),Login.this);
 
 						showUserDetailsActivity();
-					} else if (jsonResponse.getString("status").contains("0")) {
+					} else if (jsonResponse.getString("success") != null) {
 
-						removeDialog(false, jsonResponse);
+                        progressDialog.dismiss();
 
 						// showAlert
 						// pass jsonresponse to dialog
@@ -86,6 +90,7 @@ public class Login extends Activity implements OnClickListener {
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
+                    progressDialog.dismiss();
 					e.printStackTrace();
 				}
 

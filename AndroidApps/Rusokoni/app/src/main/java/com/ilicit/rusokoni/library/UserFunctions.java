@@ -8,8 +8,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.ilicit.rusokoni.Utils;
+import com.ilicit.rusokoni.model.User;
+import com.ilicit.rusokoni.model.UserModel;
 
 public class UserFunctions {
 
@@ -22,8 +27,8 @@ public class UserFunctions {
 	private static String marketIndex = "http://finance.yahoo.com/webservice/v1/symbols/allcurrencies/quote?format=json";
 	private static String dailySalesURL = "http://rusokoni.org/m/daily_sales.php";// http://192.168.137.1/ewerdima_mobile/alert.php
 	private static String postCommodityURL = "http://rusokoni.org/m/post_commodity.php";// http://192.168.137.1/ewerdima_mobile/alert.php
-	private static String loginURL = "http://rusokoni.org/m/index.php";
-	private static String registerURL = "http://rusokoni.org/m/index.php";
+	private static String loginURL = "http://rusokoni.org/index.php/api/rest/login";
+	private static String registerURL = "http://rusokoni.org﻿/index.php/api/rest/signup";
 	SharedPreferences prefs;
 	SharedPreferences.Editor editor;
 	public UserFunctions(Context context) {
@@ -97,28 +102,25 @@ public class UserFunctions {
 		return json;
 	}
 
-	/**
-	 * function make Login Request
-	 * 
-	 * @param name
-	 * @param email
-	 * @param password
-	 * */
-	public JSONObject registerUser(String name, String email, String password) {
+
+	public JSONObject registerUser(UserModel user,Activity activity) {
 		// Building Parameters
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("tag", register_tag));
-		params.add(new BasicNameValuePair("name", name));
-		params.add(new BasicNameValuePair("email", email));
-		params.add(new BasicNameValuePair("password", password));
+		params.add(new BasicNameValuePair("first_name", user.getFirst_name()));
+		params.add(new BasicNameValuePair("email", user.getEmail()));
+		params.add(new BasicNameValuePair("password", user.getPassword()));
+        params.add(new BasicNameValuePair("last_name", user.getLast_name()));
+        params.add(new BasicNameValuePair("user_country", user.getUser_country()));
 
 		// getting JSON Object
 		JSONObject json = jsonParser.getJSON(registerURL, params);
 		// return json
 		String unique_id;
 		try {
-			unique_id = json.get("unique_id").toString();
-			saveUserDetails(name, unique_id);
+			unique_id = json.getString("success").toString();
+            Utils.save("Token",unique_id,activity);
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

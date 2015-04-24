@@ -5,18 +5,31 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.HttpResponse;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.net.Uri;
+import android.net.http.AndroidHttpClient;
 import android.util.Log;
 
 public class JSONParser {
@@ -31,14 +44,27 @@ public class JSONParser {
 	public JSONObject getJSON(String url, List<NameValuePair> params){
 		
 		//Making HTTP Request
+
+        AndroidHttpClient httpclient = null;
 		try {
-			DefaultHttpClient httpClient = new DefaultHttpClient();
-			HttpPost request = new HttpPost(url);
-			request.setEntity(new UrlEncodedFormEntity(params));
-			
-			HttpResponse httpResponse = httpClient.execute(request);
-			HttpEntity httpEntity = httpResponse.getEntity();
-			is = httpEntity.getContent();
+            httpclient = AndroidHttpClient.newInstance("user agent");
+            URL urlObj = new URL(url);
+            HttpHost host = new HttpHost(urlObj.getHost(), urlObj.getPort(), urlObj.getProtocol());
+            AuthScope scope = new AuthScope(urlObj.getHost(), urlObj.getPort());
+            UsernamePasswordCredentials creds = new UsernamePasswordCredentials("rusokoni_api", "zZj0IdM0wC\"2e4M");
+
+            CredentialsProvider cp = new BasicCredentialsProvider();
+            cp.setCredentials(scope, creds);
+            HttpContext credContext = new BasicHttpContext();
+            credContext.setAttribute(ClientContext.CREDS_PROVIDER, cp);
+
+            HttpPost job = new HttpPost(url);
+            job.setEntity(new UrlEncodedFormEntity(params));
+
+            HttpResponse response = httpclient.execute(host,job,credContext);
+            StatusLine status = response.getStatusLine();
+            HttpEntity httpEntity = response.getEntity();
+            is = httpEntity.getContent();
 			
 		}catch (UnsupportedEncodingException e) {
             e.printStackTrace();
