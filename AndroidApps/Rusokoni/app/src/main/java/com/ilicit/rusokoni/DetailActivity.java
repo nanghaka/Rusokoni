@@ -152,34 +152,6 @@ public class DetailActivity extends ActionBarActivity {
     @Override
     public void onBackPressed() {
 
-        for (int i = rowContainer.getChildCount() - 1; i > 0; i--) {
 
-            View rowView = rowContainer.getChildAt(i);
-            ViewPropertyAnimator propertyAnimator = rowView.animate().setStartDelay((rowContainer.getChildCount() - 1 - i) * SCALE_DELAY)
-                    .scaleX(0).scaleY(0);
-
-            propertyAnimator.setListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animator) {
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animator) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        finishAfterTransition();
-                    } else {
-                        finish();
-                    }
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animator) {
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animator) {
-                }
-            });
-        }
     }
 }

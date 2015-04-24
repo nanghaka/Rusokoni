@@ -5,12 +5,15 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 
+import com.ilicit.rusokoni.MarketActivity;
 import com.ilicit.rusokoni.Network;
 import com.ilicit.rusokoni.R;
 import com.ilicit.rusokoni.entity.AppInfo;
+import com.ilicit.rusokoni.model.MarketModel;
 import com.nispok.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -20,20 +23,20 @@ public class UploadHelper {
     private static UploadHelper instance = null;
 
 
-    private UploadHelper(ActionBarActivity act, List<AppInfo> applicationList) {
+    private UploadHelper(ActionBarActivity act, List<MarketModel> applicationList) {
         this.act = act;
 
         if (applicationList != null) {
             this.applicationList = applicationList;
         } else {
-            this.applicationList = new ArrayList<AppInfo>();
+            this.applicationList = new ArrayList<MarketModel>();
         }
     }
 
     private ActionBarActivity act;
-    private List<AppInfo> applicationList = new ArrayList<AppInfo>();
+    private List<MarketModel> applicationList = new ArrayList<MarketModel>();
 
-    public static UploadHelper getInstance(ActionBarActivity act, List<AppInfo> applicationList) {
+    public static UploadHelper getInstance(ActionBarActivity act, List<MarketModel> applicationList) {
         if (instance == null) {
             instance = new UploadHelper(act, applicationList);
         } else if (act != null) {
@@ -91,8 +94,9 @@ public class UploadHelper {
             if (params == null || params.length == 0) {
                 mProgressDialog.setMax(applicationList.size());
 
+
                 int i = 0;
-                for (AppInfo ai : applicationList) {
+                for (MarketModel ai : applicationList) {
                     updateRequired = postData();
                     publishProgress(i);
                     if (updateRequired) {

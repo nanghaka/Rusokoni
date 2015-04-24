@@ -16,7 +16,7 @@
     <TextView
         android:id="@+id/mkt_name"
         android:gravity="center_vertical"
-        android:paddingStart="80dp"
+
         android:paddingLeft="80dp"
         android:layout_width="match_parent"
         android:layout_height="72dp"

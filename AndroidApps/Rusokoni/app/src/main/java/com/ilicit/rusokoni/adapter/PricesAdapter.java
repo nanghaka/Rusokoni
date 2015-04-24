@@ -5,29 +5,28 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ilicit.rusokoni.MainActivity;
 import com.ilicit.rusokoni.R;
-import com.ilicit.rusokoni.entity.AppInfo;
 import com.ilicit.rusokoni.model.PriceModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
-//import com.ilicit.rusokoni.R;
+/**
+ * Created by Shaffic on 4/17/15.
+ */
+public  class PricesAdapter  extends RecyclerView.Adapter<PricesAdapter.ViewHolder> {
 
-public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.ViewHolder> {
-
-    private List<AppInfo> applications;
     private int rowLayout;
-    private MainActivity mAct;
 
-    public ApplicationAdapter(List<AppInfo> applications, int rowLayout, MainActivity act) {
-        this.applications = applications;
+    Context context;
+    ArrayList<PriceModel> marketsList;
+
+
+    public PricesAdapter(ArrayList<PriceModel> marketsList, int rowLayout, Context act) {
+        this.marketsList = marketsList;
         this.rowLayout = rowLayout;
-        this.mAct = act;
+        this.context = act;
     }
 
 
@@ -38,18 +37,18 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
 
 
     public void clearApplications() {
-        int size = this.applications.size();
+        int size = this.marketsList.size();
         if (size > 0) {
             for (int i = 0; i < size; i++) {
-                applications.remove(0);
+                marketsList.remove(0);
             }
 
             this.notifyItemRangeRemoved(0, size);
         }
     }
 
-    public void addApplications(List<AppInfo> applications) {
-        this.applications.addAll(applications);
+    public void addApplications(ArrayList<PriceModel> applications) {
+        this.marketsList.addAll(applications);
         this.notifyItemRangeInserted(0, applications.size() - 1);
     }
 
@@ -61,9 +60,11 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int i) {
-        final AppInfo appInfo = applications.get(i);
-        viewHolder.name.setText(appInfo.getName());
-        viewHolder.image.setImageDrawable(appInfo.getIcon());
+        final PriceModel market = marketsList.get(i);
+        viewHolder.name.setText(market.getProd_name());
+        viewHolder.price.setText(market.getMl_price());
+        viewHolder.wholesale.setText(market.getMl_wholesaleprice());
+
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,20 +76,31 @@ public class ApplicationAdapter extends RecyclerView.Adapter<ApplicationAdapter.
 
     @Override
     public int getItemCount() {
-        return applications == null ? 0 : applications.size();
+        return marketsList == null ? 0 : marketsList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
-        public ImageView image;
+        public TextView price;
+        public TextView wholesale;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.mkt_name);
-//            image = (ImageView) itemView.findViewById(R.id.countryImage);
+            name = (TextView) itemView.findViewById(R.id.name);
+            price = (TextView) itemView.findViewById(R.id.price);
+            wholesale = (TextView) itemView.findViewById(R.id.wholesale);
+//
         }
 
     }
+
+
+
+
+
+
+
 
 
 }

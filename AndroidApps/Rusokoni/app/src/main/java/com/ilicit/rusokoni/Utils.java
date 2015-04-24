@@ -1,14 +1,23 @@
 package com.ilicit.rusokoni;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Outline;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class Utils {
+
+    public static final String MyPREFERENCES = "RusokoniInfo";
 
     /*
     public static void configureWindowEnterExitTransition(Window w) {
@@ -18,6 +27,31 @@ public class Utils {
         w.setEnterTransition(ex);
     }
     */
+
+    public static void save(String key,String value,Activity givenActivity){
+        SharedPreferences prefs = getSharedPreferencesWithin(givenActivity);
+        prefs.edit().putString(key, value).commit();
+
+    }
+
+    public static String getSaved(String key,Activity givenActivity){
+        SharedPreferences prefs = getSharedPreferencesWithin(givenActivity);
+        String js = prefs.getString(key, "");
+
+        return js;
+
+    }
+
+
+
+
+    public static SharedPreferences getSharedPreferencesWithin(Activity givenActivity) {
+        return givenActivity.getSharedPreferences(
+                MyPREFERENCES, Context.MODE_PRIVATE);
+    }
+
+
+
 
     public static void configureFab(View fabButton) {
 

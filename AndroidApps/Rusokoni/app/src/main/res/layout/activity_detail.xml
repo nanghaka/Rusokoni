@@ -51,6 +51,7 @@
 
             <include
                 android:id="@+id/row_name"
+
                 layout="@layout/row_detailiconview"/>
 
             <include

@@ -13,6 +13,11 @@ import android.widget.LinearLayout;
  * Created by Dev on 4/2/2015.
  */
 public class SplashscreenActivity extends Activity {
+
+
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +26,7 @@ public class SplashscreenActivity extends Activity {
         CountDown _tik;
         _tik=new CountDown(2000,2000,this,Login.class); // It delay the screen for 1 second and after that switch to YourNextActivity
         _tik.start();
+
 
         StartAnimations();
 
