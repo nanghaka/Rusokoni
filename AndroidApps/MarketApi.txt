@@ -62,3 +62,8 @@ Get authentication token
 curl --digest -u rusokoni_api:zZj0IdM0wC\"2e4M -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"email":"rusokoni_api@rusokoni_api.com","password":"password"}' http://rusokoni.org/index.php/api/rest/login
 Use authentication token for actions that require the user to be logged in
 curl --digest -u rusokoni_api:zZj0IdM0wC\"2e4M -H "Accept: application/json" http://rusokoni.org/index.php/api/rest/checklogin/token/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEifQ.HP83zAYkYrBuKEeuiQqDfE7x0BvvZf9D-eN62YTvJwk2D
+
+
+
+username: rusokoni_api
+password: zZj0IdM0wC"2e4M  
