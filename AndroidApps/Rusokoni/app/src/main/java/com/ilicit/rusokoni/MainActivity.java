@@ -1,7 +1,7 @@
 package com.ilicit.rusokoni;
 
 
-        import android.content.SharedPreferences;
+      import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;

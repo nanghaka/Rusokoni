@@ -27,6 +27,12 @@
         </activity>
         <activity
             android:name="com.ilicit.rusokoni.MainActivity"
+            android:label="@string/activity_detail_title" />
+        <activity
+            android:name="com.ilicit.rusokoni.Register"
+            android:label="@string/activity_detail_title" />
+        <activity
+            android:name="com.ilicit.rusokoni.Login"
             android:label="@string/activity_detail_title">
         </activity>
     </application>
