@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.ilicit.rusokoni.Utils;
 import com.ilicit.rusokoni.model.User;
@@ -28,7 +29,7 @@ public class UserFunctions {
 	private static String dailySalesURL = "http://rusokoni.org/m/daily_sales.php";// http://192.168.137.1/ewerdima_mobile/alert.php
 	private static String postCommodityURL = "http://rusokoni.org/m/post_commodity.php";// http://192.168.137.1/ewerdima_mobile/alert.php
 	private static String loginURL = "http://rusokoni.org/index.php/api/rest/login";
-	private static String registerURL = "http://rusokoni.org﻿/index.php/api/rest/signup";
+	private static String registerURL = "http://rusokoni.org/index.php/api/rest/signup";
 	SharedPreferences prefs;
 	SharedPreferences.Editor editor;
 	public UserFunctions(Context context) {
@@ -39,7 +40,7 @@ public class UserFunctions {
 	// function to send alert
 	public JSONObject postCommodity(String commodity_id, String commodity_buying_price,
 			String commodity_selling_price,
-			String longitude, String latitude) {
+			String longitude, String latitude,Activity activity) {
 		// Building Parameters
 		String user_id = prefs.getString("user_id", "2");
 		//$user_id, $latitude, $longitude, $commodity_name, $commodity_buying_price, $commodity_selling_price
@@ -51,14 +52,14 @@ public class UserFunctions {
 		params.add(new BasicNameValuePair("commodity_selling_price", commodity_selling_price));
 		params.add(new BasicNameValuePair("longitude", longitude));
 		params.add(new BasicNameValuePair("latitude", latitude));
-		JSONObject json = jsonParser.getJSON(postCommodityURL, params);
+		JSONObject json = jsonParser.getJSON(postCommodityURL, params,activity);
 		// return json
 		// Log.e("JSON", json.toString());
 		return json;
 	}
 	
 	public JSONObject dailySales( String commodity_id,
-			 String commodity_quantiy,  String commodity_unit_price) {
+			 String commodity_quantiy,  String commodity_unit_price,Activity activity) {
 		// Building Parameters
 		String user_id = prefs.getString("user_id", "2");
 		//$user_id, $latitude, $longitude, $commodity_name, $commodity_buying_price, $commodity_selling_price
@@ -68,7 +69,7 @@ public class UserFunctions {
 		params.add(new BasicNameValuePair("commodity_id", commodity_id));
 		params.add(new BasicNameValuePair("quantity_sold", commodity_quantiy));
 		params.add(new BasicNameValuePair("unit_price", commodity_unit_price));
-		JSONObject json = jsonParser.getJSON(dailySalesURL, params);
+		JSONObject json = jsonParser.getJSON(dailySalesURL, params,activity);
 		// return json
 		// Log.e("JSON", json.toString());
 		return json;
@@ -80,13 +81,13 @@ public class UserFunctions {
 	 * @param email
 	 * @param password
 	 * */
-	public JSONObject loginUser(String email, String password) {
+	public JSONObject loginUser(String email, String password,Activity activity) {
 		// Building Parameters
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("tag", login_tag));
 		params.add(new BasicNameValuePair("email", email));
 		params.add(new BasicNameValuePair("password", password));
-		JSONObject json = jsonParser.getJSON(loginURL, params);
+		JSONObject json = jsonParser.getJSON(loginURL, params,activity);
 		// return json
 		// Log.e("JSON", json.toString());
 		return json;
@@ -114,8 +115,9 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("user_country", user.getUser_country()));
 
 		// getting JSON Object
-		JSONObject json = jsonParser.getJSON(registerURL, params);
+		JSONObject json = jsonParser.getJSON(registerURL, params,activity);
 		// return json
+
 		String unique_id;
 		try {
 			unique_id = json.getString("success").toString();

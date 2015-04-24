@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Outline;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
@@ -66,6 +67,16 @@ public class Utils {
             });
         } else {
             ((ImageButton) fabButton).setScaleType(ImageView.ScaleType.FIT_CENTER);
+        }
+    }
+
+
+
+    public final static boolean isValidEmail(CharSequence target) {
+        if (TextUtils.isEmpty(target)) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     }
 }

@@ -31,9 +31,12 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.net.http.AndroidHttpClient;
 import android.util.Base64;
 import android.util.Log;
+
+import com.ilicit.rusokoni.Utils;
 
 public class JSONParser {
 
@@ -49,7 +52,7 @@ public class JSONParser {
 	// function get json from url
 	// by making HTTP POST or GET mehtod
 	public String makeHttpRequest(String url, String method,
-			List<NameValuePair> params) {
+			List<NameValuePair> params,Activity activity) {
         HttpURLConnection myURLConnection = null;
         AndroidHttpClient httpclient = null;
 
@@ -80,7 +83,7 @@ public class JSONParser {
                     URL urlObj = new URL(url);
                     HttpHost host = new HttpHost(urlObj.getHost(), urlObj.getPort(), urlObj.getProtocol());
                     AuthScope scope = new AuthScope(urlObj.getHost(), urlObj.getPort());
-                    UsernamePasswordCredentials creds = new UsernamePasswordCredentials("rusokoni_api", "zZj0IdM0wC\"2e4M");
+                    UsernamePasswordCredentials creds = new UsernamePasswordCredentials(Utils.getSaved("apiUsername", activity), Utils.getSaved("apipassword",activity));
 
                     CredentialsProvider cp = new BasicCredentialsProvider();
                     cp.setCredentials(scope, creds);

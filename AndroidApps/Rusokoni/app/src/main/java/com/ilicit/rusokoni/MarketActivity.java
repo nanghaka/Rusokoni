@@ -127,7 +127,7 @@ public class MarketActivity extends Activity {
 
             // getting JSON string from URL
             String json = jsonParser.makeHttpRequest(URL_MARKETS, "GET",
-                    params);
+                    params,MarketActivity.this);
 
             // Check your log cat for JSON reponse
             Log.e("Markets JSON: ", "> " + json);

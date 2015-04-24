@@ -106,6 +106,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/usercountry"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_gravity="center_horizontal"
                 />
 

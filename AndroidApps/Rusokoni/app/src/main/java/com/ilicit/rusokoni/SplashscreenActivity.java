@@ -24,9 +24,20 @@ public class SplashscreenActivity extends Activity {
         setContentView(R.layout.main);
 
         CountDown _tik;
-        _tik=new CountDown(2000,2000,this,Login.class); // It delay the screen for 1 second and after that switch to YourNextActivity
-        _tik.start();
+        if(Utils.getSaved("Token",this).equalsIgnoreCase("")) {
+            _tik = new CountDown(2000, 2000, this, Login.class); // It delay the screen for 1 second and after that switch to YourNextActivity
+            _tik.start();
 
+            Utils.save("apiUsername", "rusokoni_api", this);
+            Utils.save("apipassword", "zZj0IdM0wC\"2e4M", this);
+        }else{
+            _tik = new CountDown(2000, 2000, this, MainActivity.class); // It delay the screen for 1 second and after that switch to YourNextActivity
+            _tik.start();
+
+            Utils.save("apiUsername", "rusokoni_api", this);
+            Utils.save("apipassword", "zZj0IdM0wC\"2e4M", this);
+
+        }
 
         StartAnimations();
 

@@ -114,7 +114,7 @@ public class MarketListActivity extends Fragment{
 
             // getting JSON string from URL
             String json = jsonParser.makeHttpRequest(URL_MARKETS, "GET",
-                    paramaters);
+                    paramaters,getActivity());
 
             // Check your log cat for JSON reponse
             Log.e("Markets JSON: ", "> " + json);

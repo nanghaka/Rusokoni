@@ -52,8 +52,20 @@ public class Login extends Activity implements OnClickListener {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
                 progressDialog.show();
-				normalLogin(username.getText().toString(), password.getText()
-						.toString());
+
+                if(username.getText().length()>0){
+                    if(password.length() >0){
+                        normalLogin(username.getText().toString(), password.getText()
+                                .toString());
+
+                    }else{
+                        password.setError("Please fill in the password");
+                    }
+                }else{
+
+                    username.setError("Username is required");
+                }
+
 			}
 		});
 	}
@@ -71,7 +83,7 @@ public class Login extends Activity implements OnClickListener {
 			public void run() {
 				// TODO Auto-generated method stub
 				JSONObject jsonResponse = null;
-				jsonResponse = userFunctions.loginUser(email, password);
+				jsonResponse = userFunctions.loginUser(email, password,Login.this);
 				try {
 					if (jsonResponse.has("success")) {
 
@@ -87,6 +99,10 @@ public class Login extends Activity implements OnClickListener {
 						// pass jsonresponse to dialog
 					} else {
 						// showAlert //network fail
+                        if(jsonResponse.has("error")) {
+                            Toast.makeText(Login.this, "" + jsonResponse.getString("error"), Toast.LENGTH_LONG).show();
+                        }
+
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block

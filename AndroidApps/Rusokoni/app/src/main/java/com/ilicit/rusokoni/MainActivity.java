@@ -209,7 +209,7 @@ public class MainActivity extends ActionBarActivity {
 
             // getting JSON string from URL
             String json = jsonParser.makeHttpRequest(URL_MARKETS, "GET",
-                    paramaters);
+                    paramaters,MainActivity.this);
 
             // Check your log cat for JSON reponse
             Log.e("Markets JSON: ", "> " + json);

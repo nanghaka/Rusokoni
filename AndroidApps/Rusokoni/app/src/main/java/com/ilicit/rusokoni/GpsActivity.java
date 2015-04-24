@@ -205,7 +205,7 @@ public class GpsActivity implements
             Utils.save("lat",lat, (android.app.Activity) context);
             Utils.save("long",log, (android.app.Activity) context);
 
-            Toast.makeText(context, lat + " " + String.valueOf(mCurrentLocation.getLongitude()), Toast.LENGTH_LONG).show();
+       //     Toast.makeText(context, lat + " " + String.valueOf(mCurrentLocation.getLongitude()), Toast.LENGTH_LONG).show();
 
         }
     }
