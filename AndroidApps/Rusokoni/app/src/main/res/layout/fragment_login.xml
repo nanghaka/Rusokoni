@@ -20,7 +20,7 @@
             android:layout_height="150dp"
             android:alpha="1.5"
             android:gravity="center"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo_low" />
     </LinearLayout>
 
     <Button
@@ -143,6 +143,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:lines="2"
+        android:layout_margin="12dp"
         android:text="Welcome To get started, Login"
         android:textSize="17sp" />
 
